@@ -1,11 +1,12 @@
 FROM ubuntu:16.04
-MAINTAINER bravo325806 bravo325806@gmail.com
 
 WORKDIR /
-RUN apt-get update
-RUN apt-get install python3-pip git libglib2.0-0 libsm6 libxrender1 -y
-RUN pip3 install tensorflow opencv-python flask flask-cors
-RUN git clone https://github.com/bravo325806/rtmp_predict
-WORKDIR /rtmp_predict
+
+RUN apt-get update && apt-get install libusb-1.0-0-dev vim git libsm6 libxext6 libxrender-dev libgtk2.0-dev  python3.5 python3-pip -y
+RUN git clone https://github.com/bravo325806/usb_predict
+
+WORKDIR /usb_predict
+
+RUN pip3 install pyrealsense2 opencv-python tensorflow flask flask-cors numpy==1.16.4
 
 CMD python3 main.py

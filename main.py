@@ -77,14 +77,6 @@ def deploy():
         z = zipfile.ZipFile(localfile)
         z.extractall('model/')
         os.remove('model/'+filename) 
-#    if zip_url == '1':
-#         copyfile('built_graph/tiny-yolo-2c.meta', 'model/model.meta')
-#         copyfile('built_graph/tiny-yolo-2c.pb', 'model/model.pb')
-#         copyfile('built_graph/labels_2.txt', 'model/labels.txt')
-#    elif zip_url == '2':
-#         copyfile('built_graph/tiny-yolov2-4c.meta', 'model/model.meta')
-#         copyfile('built_graph/tiny-yolov2-4c.pb', 'model/model.pb')
-#         copyfile('built_graph/labels_4.txt', 'model/labels.txt')
     options = {"pbLoad": "model/model.pb", "metaLoad": "model/model.meta", "threshold": 0.4}
     tfnet = TFNet(options)
     labels = load_labels()
