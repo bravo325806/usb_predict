@@ -64,7 +64,7 @@ def deploy():
     global labels
     if 'url' in request.args:
         zip_url = request.args['url']
-    ftp = FTP('10.0.0.95')
+    ftp = FTP('211.20.7.116')
     ftp.login('dl-ftp','123')
     path = '/'.join(zip_url.split('/')[:-1])
     filename = zip_url.split('/')[-1]

@@ -7,6 +7,6 @@ RUN git clone https://github.com/bravo325806/usb_predict
 
 WORKDIR /usb_predict
 
-RUN pip3 install pyrealsense2 opencv-python tensorflow flask flask-cors numpy==1.16.4
+RUN pip3 install pyrealsense2 opencv-python tensorflow flask flask-cors numpy==1.16.4 requests
 
 CMD python3 main.py
