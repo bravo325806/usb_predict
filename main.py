@@ -64,8 +64,8 @@ def deploy():
     global labels
     if request.method == 'POST':
         zip_url = request.values['zip_url']
-    zipfile = 'darkflow/built_graph/'+zip_url
-    z = zipfile.ZipFile(zipfile)
+    model_file = 'darkflow/built_graph/'+zip_url
+    z = zipfile.ZipFile(model_file)
     z.extractall('model/')
     options = {"pbLoad": "model/model.pb", "metaLoad": "model/model.meta", "threshold": 0.4}
     tfnet = TFNet(options)

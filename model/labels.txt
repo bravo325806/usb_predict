@@ -1,2 +1,4 @@
-entry box
-reader box
+ok
+peace
+punch
+stop
