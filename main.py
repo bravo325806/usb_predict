@@ -48,7 +48,7 @@ def gen():
     config = rs.config()
     config.enable_stream(rs.stream.color, 640, 480, rs.format.bgr8, 60)
     pipeline.start(config)
-    options = {"pbLoad": "model/model.pb", "metaLoad": "model/model.meta", "threshold": 0.4}
+    options = {"pbLoad": "model/tiny-yolo-box3.pb", "metaLoad": "model/tiny-yolo-box3.meta", "threshold": 0.1}
     tfnet = TFNet(options)
     while True:
         frame = get_capture(pipeline)
@@ -58,25 +58,17 @@ def gen():
         yield (b'--frame\r\n'
                b'Content-Type: image/jpeg\r\n\r\n' + jpeg.tobytes() + b'\r\n\r\n')
 
-@app.route('/deploy')
+@app.route('/deploy', methods=['POST'])
 def deploy():
     global tfnet
     global labels
-    if 'url' in request.args:
-        zip_url = request.args['url']
-    ftp = FTP('211.20.7.116')
-    ftp.login('dl-ftp','123')
+    if request.method == 'POST':
+        zip_url = request.values['zip_url']
     path = '/'.join(zip_url.split('/')[:-1])
     filename = zip_url.split('/')[-1]
-    ftp.cwd(path)
-    with open('model/'+filename, 'wb') as localfile:
-        ftp.retrbinary('RETR ' + filename, localfile.write, 1024)
-        ftp.quit()
-    if os.path.isfile('model/'+filename): 
-        localfile = open('model/'+filename, 'rb')
-        z = zipfile.ZipFile(localfile)
-        z.extractall('model/')
-        os.remove('model/'+filename) 
+    zipfile = 'darkflow/built_graph/model/'+filename
+    z = zipfile.ZipFile(zipfile)
+    z.extractall('model/')
     options = {"pbLoad": "model/model.pb", "metaLoad": "model/model.meta", "threshold": 0.4}
     tfnet = TFNet(options)
     labels = load_labels()
