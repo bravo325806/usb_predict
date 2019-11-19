@@ -64,9 +64,7 @@ def deploy():
     global labels
     if request.method == 'POST':
         zip_url = request.values['zip_url']
-    path = '/'.join(zip_url.split('/')[:-1])
-    filename = zip_url.split('/')[-1]
-    zipfile = 'darkflow/built_graph/model/'+filename
+    zipfile = 'darkflow/built_graph/'+zip_url
     z = zipfile.ZipFile(zipfile)
     z.extractall('model/')
     options = {"pbLoad": "model/model.pb", "metaLoad": "model/model.meta", "threshold": 0.4}
