@@ -67,7 +67,7 @@ def deploy():
     model_file = 'darkflow/built_graph/'+zip_url
     z = zipfile.ZipFile(model_file)
     z.extractall('model/')
-    options = {"pbLoad": "model/model.pb", "metaLoad": "model/model.meta", "threshold": 0.4}
+    options = {"pbLoad": "model/model.pb", "metaLoad": "model/model.meta", "threshold": 0.1}
     tfnet = TFNet(options)
     labels = load_labels()
     return Response('sucess', status=200)
