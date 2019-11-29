@@ -48,7 +48,7 @@ def gen():
     config = rs.config()
     config.enable_stream(rs.stream.color, 640, 480, rs.format.bgr8, 60)
     pipeline.start(config)
-    options = {"pbLoad": "model/tiny-yolo-box3.pb", "metaLoad": "model/tiny-yolo-box3.meta", "threshold": 0.1}
+    options = {"pbLoad": "model/model.pb", "metaLoad": "model/model.meta", "threshold": 0.1}
     tfnet = TFNet(options)
     while True:
         frame = get_capture(pipeline)

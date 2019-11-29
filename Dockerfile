@@ -10,4 +10,4 @@ WORKDIR /usb_predict
 RUN pip3 install pyrealsense2 opencv-python tensorflow flask flask-cors numpy==1.16.4 requests
 RUN mkdir darkflow/built_graph
 
-CMD nohup python3 main.py
+CMD nohup python3 -u main.py > nohup.out
