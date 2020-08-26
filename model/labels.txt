@@ -1,2 +1,2 @@
-entry box
-reader box
+ok
+peace
